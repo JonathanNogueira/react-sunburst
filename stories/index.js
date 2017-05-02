@@ -19,39 +19,107 @@ storiesOf('Sunburst', module)
         <Sunburst data={ fakeData2() } colors={ chartColors } valueField='size'> </Sunburst>
       </div>
   ))
-  .add('chaning value field', () => (
-      <div style={ {width: 500} }>
-        <Sunburst data={ fakeData2() } valueField="size"> </Sunburst>
+  .add('resize', () => (
+      <div style={ {
+          width: '25px',
+          height: '25px',
+          resize: 'both',
+          border: '2px solid',
+          padding: '20px',
+          overflow: 'auto'
+      } }>
+        <Sunburst data={ fakeData2() } colors={ chartColors } valueField='size'> </Sunburst>
       </div>
   ))
   .add('chaning value field', () => (
       <div style={ {width: 500} }>
-        <Sunburst data={ fakeData2() } valueField="size" onClick={ action('clicked') }> </Sunburst>
+        <Sunburst data={ data } > </Sunburst>
+        <button onClick={ action('clicked') } ></button>
       </div>
   ))
+  .add('loading', () => {
+    <Sunburst></Sunburst>
+  })
   .add('empty', () => (
     <Sunburst></Sunburst> 
   ));
 
-  const chartColors = [
-    'none',
-    '#007b89', // @ipswitch-brand
-    '#5f4dad', // @blue-marguerite
-    '#58a018', // @vibrant-mid-green
-    '#219ca5', // @ipswitch-brand-alt
-    '#ff9700', // @vibrant-orange
-    '#f26d00', // @dark-orange
-    '#c4308c', // @med-red-violet
-    '#318406', // @dark-green
-    '#edd943', // @vibrant-yellow
-    '#e55791', // @dark-pink
-    '#8ec449', // @vibrant-green
-    '#4f5051', // @dark-grey
-    '#fabb17'  // @ipswitch-orange
+const chartColors = [
+    '#90D0C1',
+    '#F3D67D',
+    '#E0715D',
+    '#98A599',
+    '#8E7D71',
+    '#D7DDE3'
 ];
 
+const data = {
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [
+    {
+     "name": "cluster",
+     "children": [
+      {"name": "AgglomerativeCluster", "size": 3938, "value": 321},
+      {"name": "CommunityStructure", "size": 3812, "value": 23},
+      {"name": "HierarchicalCluster", "size": 6714, "value": 5478},
+      {"name": "MergeEdge", "size": 743, "value": 1283}
+     ]
+    },
+    {
+     "name": "graph",
+     "children": [
+      {"name": "BetweennessCentrality", "size": 3534, "value": 721},
+      {"name": "LinkDistance", "size": 5731, "value": 891},
+      {"name": "MaxFlowMinCut", "size": 7840, "value": 910},
+      {"name": "ShortestPaths", "size": 5914, "value": 513},
+      {"name": "SpanningTree", "size": 3416, "value": 7583}
+     ]
+    },
+    {
+     "name": "optimization",
+     "children": [
+      {"name": "AspectRatioBanker", "size": 7074, "value": 134}
+     ]
+    }
+   ]
+  },
+  {
+   "name": "animate",
+   "children": [
+    {"name": "Easing", "size": 17010, "value": 432},
+    {"name": "FunctionSequence", "size": 5842, "value": 342},
+    {
+     "name": "interpolate",
+     "children": [
+      {"name": "ArrayInterpolator", "size": 1983, "value": 671},
+      {"name": "ColorInterpolator", "size": 2047, "value": 893},
+      {"name": "DateInterpolator", "size": 1375, "value": 789},
+      {"name": "Interpolator", "size": 8746, "value": 324},
+      {"name": "MatrixInterpolator", "size": 2202, "value": 412},
+      {"name": "NumberInterpolator", "size": 1382, "value": 678},
+      {"name": "ObjectInterpolator", "size": 1629, "value": 931},
+      {"name": "PointInterpolator", "size": 1675, "value": 234},
+      {"name": "RectangleInterpolator", "size": 2042, "value": 981}
+     ]
+    },
+    {"name": "ISchedulable", "size": 1041, "value": 871},
+    {"name": "Parallel", "size": 5176, "value": 3490},
+    {"name": "Pause", "size": 449, "value": 341},
+    {"name": "Scheduler", "size": 5593, "value": 324},
+    {"name": "Sequence", "size": 5534, "value": 901},
+    {"name": "Transition", "size": 9201, "value": 891},
+    {"name": "Transitioner", "size": 19975, "value": 734},
+    {"name": "TransitionEvent", "size": 1116, "value": 567},
+    {"name": "Tween", "size": 6006, "value": 467}
+   ]
+  }
+  ]
+};
 
-      function fakeData2() {
+function fakeData2() {
         return {
  "name": "flare",
  "children": [

@@ -1,14 +1,17 @@
 import React from 'react';
 import { hierarchy, partition } from 'd3-hierarchy';
-import { scaleOrdinal, schemeCategory20} from 'd3-scale';
+import { scaleOrdinal, schemeCategory10} from 'd3-scale';
 import { arc } from 'd3-shape';
+import ChartShell from './ChartShell';
+import Arc from './Arc';
+
 import './sunburst.scss';
 
 export default class Sunburst extends React.Component {
     constructor(props) {
         super(props);
 
-        this.radius = 400; 
+        this.radius = 1000; 
 
         this.arcGenerator = arc()
             .startAngle((d) => {
@@ -27,7 +30,7 @@ export default class Sunburst extends React.Component {
         this.d3PartitionLayout = partition()
             .size([2 * Math.PI, this.radius * this.radius]);
 
-        this.color = scaleOrdinal(this.props.colors || schemeCategory20);
+        this.color = scaleOrdinal(this.props.colors || schemeCategory10);
     }
 
     componentWillMount() {
@@ -42,36 +45,23 @@ export default class Sunburst extends React.Component {
 
     render() {
         return (
-            <svg className={ 'fade-in' } viewBox={-this.radius + ' ' +  -this.radius + ' ' + ((this.radius * 2)) + ' ' + ((this.radius * 2))}
-                preserveAspectRatio="xMidYMid meet">
-                { this.props.data ? (
-                    <g> { this.renderArcs([this.tranformToHierarchyData(this.state.selected)]) } </g>
-                ) : (
-                    <text> No Data </text>
-                ) }
-            </svg>
+            <ChartShell hasData={ !!this.props.data } viewBox={-this.radius + ' ' +  -this.radius + ' ' + ((this.radius * 2)) + ' ' + ((this.radius * 2))}
+                 >
+                    { this.renderArcs(this.tranformToHierarchyData(this.state.selected).descendants()) }
+            </ChartShell>
         );
     }
 
     renderArcs(data) {
-        return data.map((data, index) => { 
+        return data.map((data, index) => {
             let style = {
-                fill: this.color((data.children ? data : data.parent).depth)
+                fill: data.parent ? this.color((data.children ? data : data.parent).depth) : 'transparent'
             };
             //TODO fix the unqiue key of the render
-            return <g key={ data.data[this.props.displayField] }  className='arc-group fade-in' >
-                        <g className='arc-path' onClick={ this.props.onClick }>
-                            <path d={ this.arcGenerator(data) } style={ style }>
-                            </path>
-                 
-                                <text transform={'translate(' + this.computeTextTranslate(data) + ')rotate(' + this.computeTextRotation(data) + ')'}>
-                                    {data.data[this.props.displayField]}
-                                </text>
-                
-                        </g>
-                        { data.children && this.renderArcs(data.children) }
-                    </g>; 
-                });
+            return (
+                <Arc key={ data.data[this.props.displayField] }  d={ this.arcGenerator(data) } style={ style }></Arc>
+            )
+        });
     }
 
     computeTextRotation(data) {
@@ -98,5 +88,5 @@ export default class Sunburst extends React.Component {
 
 Sunburst.defaultProps = {
     displayField: '',
-    valueField: 'value' //TODO fix supoort for different values
+    valueField: 'value'
 }
