@@ -41,7 +41,16 @@ storiesOf('Sunburst', module)
     <Sunburst></Sunburst>
   })
   .add('empty', () => (
-    <Sunburst></Sunburst> 
+          <div style={ {
+          width: '25px',
+          height: '25px',
+          resize: 'both',
+          border: '2px solid',
+          padding: '20px',
+          overflow: 'auto'
+      } }>
+        <Sunburst></Sunburst>
+      </div>
   ));
 
 const chartColors = [

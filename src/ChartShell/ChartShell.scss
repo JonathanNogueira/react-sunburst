@@ -1,0 +1,15 @@
+.chart-shell {
+    width: 100%; 
+    height: 100%;
+
+    .no-data-msg {
+        width: 100%; 
+        height: 100%; 
+        color: grey;
+        font-size: 1em;
+        font-family: sans-serif;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    }
+}

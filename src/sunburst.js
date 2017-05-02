@@ -2,7 +2,7 @@ import React from 'react';
 import { hierarchy, partition } from 'd3-hierarchy';
 import { scaleOrdinal, schemeCategory10} from 'd3-scale';
 import { arc } from 'd3-shape';
-import ChartShell from './ChartShell';
+import ChartShell from '../src/ChartShell';
 import Arc from './Arc';
 
 import './sunburst.scss';
