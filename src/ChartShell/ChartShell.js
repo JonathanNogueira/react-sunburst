@@ -10,7 +10,7 @@ const ChartShell = ({ children, hasData, viewBox }) => {
                     { children }
                   </svg>  
                 ) : (
-                    <div className='no-data-msg'>No data available</div>
+                    <div className='loading-data-mask'>Loading{ /* No data available */ } </div>
                 )
             }
         </div>

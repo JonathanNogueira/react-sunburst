@@ -59,7 +59,7 @@ export default class Sunburst extends React.Component {
             };
             //TODO fix the unqiue key of the render
             return (
-                <Arc key={ data.data[this.props.displayField] }  d={ this.arcGenerator(data) } style={ style }></Arc>
+                <Arc key={ data.data[this.props.displayField] } onMouseOver={ () => {console.log('hover');}} d={ this.arcGenerator(data) } style={ style }></Arc>
             )
         });
     }
