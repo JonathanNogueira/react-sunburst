@@ -1,20 +1,20 @@
 import React from 'react';
 import './ChartShell.scss';
 
-//TODO create not data message
-const ChartShell = ({ children, hasData, viewBox }) => {
+const ChartShell = ({ children, viewBox, width, height }) => {
     return (
         <div className='chart-shell'>
-            { hasData ? 
-                ( <svg width='100%' height='100%' viewBox={ viewBox } preserveAspectRatio="xMidYMid meet">
-                    { children }
-                  </svg>  
-                ) : (
-                    <div className='loading-data-mask'>Loading{ /* No data available */ } </div>
-                )
-            }
+            <svg width={ width } height={ height } viewBox={ viewBox } preserveAspectRatio="xMidYMid meet">
+                { children }
+            </svg>  
         </div>
     );
 };
 
 export default ChartShell;
+
+ChartShell.defaultProps = {
+    width: '100%',
+    height: '100%',
+    viewBox: ''
+};
