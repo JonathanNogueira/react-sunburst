@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Welcome from './Welcome';
 import Sunburst from '../src/sunburst';
+import Resizable from './Resizable';
+import BreadCrumbChart from './BreadCrumbChart';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
@@ -20,16 +22,9 @@ storiesOf('Sunburst', module)
       </div>
   ))
   .add('resize', () => (
-      <div style={ {
-          width: '25px',
-          height: '25px',
-          resize: 'both',
-          border: '2px solid',
-          padding: '20px',
-          overflow: 'auto'
-      } }>
+      <Resizable>
         <Sunburst data={ fakeData2() } colors={ chartColors } valueField='size'> </Sunburst>
-      </div>
+      </Resizable>
   ))
   .add('chaning value field', () => (
       <div style={ {width: 500} }>
@@ -37,20 +32,9 @@ storiesOf('Sunburst', module)
         <button onClick={ action('clicked') } ></button>
       </div>
   ))
-  .add('loading', () => {
-    <Sunburst></Sunburst>
-  })
-  .add('empty', () => (
-          <div style={ {
-          width: '25px',
-          height: '25px',
-          resize: 'both',
-          border: '2px solid',
-          padding: '20px',
-          overflow: 'auto'
-      } }>
-        <Sunburst></Sunburst>
-      </div>
+  .add('bread crumbs!', () => (
+      <BreadCrumbChart data={ data }>
+      </BreadCrumbChart>
   ));
 
 const chartColors = [
