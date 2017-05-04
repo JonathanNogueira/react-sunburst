@@ -2,8 +2,8 @@ import React from 'react';
 
 const Resizable = ({ children }) => {
     let style = {
-          width: '100px',
-          height: '100px',
+          width: '250px',
+          height: '250px',
           resize: 'both',
           border: '2px solid',
           padding: '20px',
