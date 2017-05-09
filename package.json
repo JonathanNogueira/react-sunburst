@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "description": "Sunburst chart created using react and d3 ",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JonathanNogueira/react-sunburst.git"
+  },
   "scripts": {
-    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
     "test": "test",
     "webpack": "webpack",
     "storybook": "start-storybook -p 6006",
