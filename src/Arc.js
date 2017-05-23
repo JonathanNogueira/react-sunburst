@@ -1,8 +1,9 @@
 import React from 'react'; 
 
-const Arc = ({ d, style, onMouseOver }) => {
+const Arc = ({ d, style, onMouseOver, onMouseOut }) => {
     return (
-        <path className='arc-path fade-color' onMouseOver={ onMouseOver } d={ d } style={ style } ></path>
+        <path className='arc-path fade-color' onMouseOut={ onMouseOut } 
+            onMouseOver={ onMouseOver } d={ d } style={ style } ></path>
     );
 };
 

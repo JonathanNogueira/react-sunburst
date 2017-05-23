@@ -11,7 +11,7 @@ export default class Sunburst extends React.Component {
     constructor(props) {
         super(props);
 
-        this.radius = 1000; 
+        this.radius = 700; 
 
         this.arcGenerator = arc()
             .startAngle((d) => {
@@ -45,8 +45,7 @@ export default class Sunburst extends React.Component {
 
     render() {
         return (
-            <ChartShell hasData={ !!this.props.data } viewBox={-this.radius + ' ' +  -this.radius + ' ' + ((this.radius * 2)) + ' ' + ((this.radius * 2))}
-                 >
+            <ChartShell viewBox={-this.radius + ' ' +  -this.radius + ' ' + ((this.radius * 2)) + ' ' + ((this.radius * 2))}>
                     { this.renderArcs(this.tranformToHierarchyData(this.state.selected).descendants()) }
             </ChartShell>
         );
@@ -59,21 +58,11 @@ export default class Sunburst extends React.Component {
             };
             //TODO fix the unqiue key of the render
             return (
-                <Arc key={ data.data[this.props.displayField] } onMouseOver={ () => {console.log('hover');}} d={ this.arcGenerator(data) } style={ style }></Arc>
+                <Arc key={ data.data[this.props.displayField] } onMouseOver={ () => { this.props.onMouseArcOver(data) } } 
+                    onMouseOut={ () => { this.props.onMouseArcOut(data) } } d={ this.arcGenerator(data) } style={ style }>
+                </Arc>
             )
         });
-    }
-
-    computeTextRotation(data) {
-	    return  data.depth ? (data.x0 + (data.x1 - data.x0) / 2 - Math.PI / 2) / Math.PI * 180 : 0;
-    }
-
-    computeTextTranslate(data) {
-        return  data.depth ? this.arcGenerator.centroid(data) : [0,0];
-    }
-
-    shouldTextMount(data) {
-        return ((data.x1 - data.x0) * this.radius / 3) > 16; 
     }
 
     toggleHover(data) {
@@ -86,7 +75,11 @@ export default class Sunburst extends React.Component {
     }
 }
 
+const emptyFn = () => {}
+
 Sunburst.defaultProps = {
     displayField: '',
-    valueField: 'value'
+    valueField: 'value',
+    onMouseArcOver: emptyFn,
+    onMouseArcOut: emptyFn
 }

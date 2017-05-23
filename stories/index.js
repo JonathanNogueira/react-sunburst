@@ -8,22 +8,27 @@ import BreadCrumbChart from './BreadCrumbChart';
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
     <Welcome showApp={linkTo('Button')}/>
+  ))
+  .add('to events', () => (
+    <svg className='thediv' style={ {width: 300, height: 300} }>
+      <circle cx={30} cy={30} r={15} onMouseOver={action('over')} onMouseOut={action('out')}></circle>
+    </svg>
   ));
 
 storiesOf('Sunburst', module)
   .add('with data', () => (
       <div style={ {width: 500} }>
-        <Sunburst data={ fakeData2() } valueField='size'> </Sunburst>
+        <Sunburst data={ fakeData } valueField='size'> </Sunburst>
       </div>
   ))
   .add('custom colors', () => (
       <div style={ {width: 500} }>
-        <Sunburst data={ fakeData2() } colors={ chartColors } valueField='size'> </Sunburst>
+        <Sunburst data={ fakeData } colors={ chartColors } valueField='size'> </Sunburst>
       </div>
   ))
   .add('resize', () => (
       <Resizable>
-        <Sunburst data={ fakeData2() } colors={ chartColors } valueField='size'> </Sunburst>
+        <Sunburst data={ fakeData } colors={ chartColors } valueField='size'> </Sunburst>
       </Resizable>
   ))
   .add('chaning value field', () => (
@@ -33,7 +38,7 @@ storiesOf('Sunburst', module)
       </div>
   ))
   .add('bread crumbs!', () => (
-      <BreadCrumbChart data={ data }>
+      <BreadCrumbChart data={ fakeData } valueField='size'>
       </BreadCrumbChart>
   ));
 
@@ -112,8 +117,7 @@ const data = {
   ]
 };
 
-function fakeData2() {
-        return {
+const fakeData ={
  "name": "flare",
  "children": [
   {
@@ -493,4 +497,3 @@ function fakeData2() {
   }
  ]
 }
-    }

@@ -10,17 +10,25 @@ export default class BreadCrumbChart extends React.Component {
     
     render() {
         return (
-            <Resizable>
-                <Sunburst data={ this.props.data } onMouseOver={ this.arcHover }></Sunburst>
+            <div style={ {width: 300, height: 400} }>
+                <div>
+                    <Sunburst valueField={ this.props.valueField } data={ this.props.data } onMouseArcOut={ this.arcOut } 
+                    onMouseArcOver={ this.arcHover }></Sunburst>
+                </div>   
                 <BreadCrumb path={ this.state.hover }></BreadCrumb>
-            </Resizable>
+            </div>
         );
     }
 
     arcHover = (data) => {
-        console.log('hover');
         this.setState({
-            hover: [ data.name ]
+            hover: [ data.data.name ]
+        });
+    }
+
+    arcOut = (data) => {
+        this.setState({
+            hover: ['']
         });
     }
 }; 
