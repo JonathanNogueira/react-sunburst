@@ -46,7 +46,7 @@ export default class Sunburst extends React.Component {
     render() {
         return (
             <ChartShell viewBox={-this.radius + ' ' +  -this.radius + ' ' + ((this.radius * 2)) + ' ' + ((this.radius * 2))}>
-                    { this.renderArcs(this.tranformToHierarchyData(this.state.selected).descendants()) }
+                    { this.renderArcs(this.transformToHierarchyData(this.state.selected).descendants()) }
             </ChartShell>
         );
     }
@@ -70,7 +70,7 @@ export default class Sunburst extends React.Component {
         // this.setState({ hover: data.data.hover });
     }
 
-    tranformToHierarchyData(data = []) {
+    transformToHierarchyData(data = []) {
         return this.d3PartitionLayout(data.copy().sum((d) => { return d[this.props.valueField]; }));
     }
 }
