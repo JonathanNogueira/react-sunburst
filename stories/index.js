@@ -4,6 +4,7 @@ import Welcome from './Welcome';
 import Sunburst from '../src/sunburst';
 import Resizable from './Resizable';
 import BreadCrumbChart from './BreadCrumbChart';
+import ToggleValueField from './ToggleValueField'; 
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
@@ -33,8 +34,7 @@ storiesOf('Sunburst', module)
   ))
   .add('chaning value field', () => (
       <div style={ {width: 500} }>
-        <Sunburst data={ data } > </Sunburst>
-        <button onClick={ action('clicked') } ></button>
+        <ToggleValueField data={ data } > </ToggleValueField>
       </div>
   ))
   .add('bread crumbs!', () => (
