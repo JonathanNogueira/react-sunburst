@@ -4,7 +4,8 @@ import './ChartShell.scss';
 const ChartShell = ({ children, viewBox, width, height }) => {
     return (
         <div className='chart-shell'>
-            <svg width={ width } height={ height } viewBox={ viewBox } preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+            <svg width={ width } height={ height } viewBox={ viewBox } preserveAspectRatio="xMidYMid meet" 
+                shapeRendering="geometricPrecision">
                 { children }
             </svg>  
         </div>
