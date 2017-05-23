@@ -1,7 +1,6 @@
 import React from 'react';
 import BreadCrumb from '../src/BreadCrumb';
 import Sunburst from '../src/sunburst';
-import Resizable from './Resizable';
 
 export default class BreadCrumbChart extends React.Component {
     state = {
@@ -21,8 +20,16 @@ export default class BreadCrumbChart extends React.Component {
     }
 
     arcHover = (data) => {
+        let path = '', 
+            ancestors = data.ancestors();
+
+        for(var i = 0; i < ancestors.length; i++) {
+            let name = ancestors[i].data.name;
+
+            path += i < ancestors.length - 1 ? name + ' -> ' : name; 
+        }
         this.setState({
-            hover: [ data.data.name ]
+            hover: [ path ]
         });
     }
 
