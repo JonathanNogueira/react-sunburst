@@ -1,6 +1,6 @@
 // you can use this file to add your custom webpack plugins, loaders and anything you like.
-// This is just the basic way to add addional webpack configurations.
-// For more information refer the docs: https://getstorybook.io/docs/configurations/custom-webpack-config
+// This is just the basic way to add additional webpack configurations.
+// For more information refer the docs: https://storybook.js.org/configurations/custom-webpack-config
 
 // IMPORTANT
 // When you add this file, we won't add the default configurations which is similar
@@ -10,12 +10,40 @@ module.exports = {
   plugins: [
     // your custom plugins
   ],
+
+  devtool: "source-map", // any "source-map"-like devtool is possible
   module: {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ['style', 'css', 'sass']
       }
+    ],
+
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader", options: {
+            sourceMap: true
+          }
+        }, {
+          loader: "sass-loader", options: {
+            sourceMap: true
+          }
+        }]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: { presets: ['es2015', 'react'] }
+        }
+      },
+      // add your custom rules.
     ],
   },
 };

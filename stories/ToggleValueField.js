@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Sunburst from '../src/sunburst';
 
-export default class ToggleValueField extends React.Component {
-    state = {
-        valueField: 'value'
-    }
-    
-    render() {
-        return (
-            <div style={ {width: 300, height: 400} }>
-                <div>
-                    <Sunburst valueField={ this.state.valueField } data={ this.props.data }></Sunburst>
-                </div>   
-                 <button onClick={ () => { this.onClickHandler() }  } >Toggle</button>
-            </div>
-        );
-    }
+export default class ToggleValueField extends Component {
+  constructor(props) {
+    super(props);
 
-    onClickHandler() {
-        let newValueField = this.state.valueField === 'value' ? 'size' : 'value';
-
-        this.setState({
-            valueField: newValueField
-        });
+    this.state = {
+      valueField: 'value'
     }
+  }
+
+  render() {
+    return (
+      <div style={{ width: 300, height: 400 }}>
+        <div>
+          <Sunburst valueField={this.state.valueField} data={this.props.data}></Sunburst>
+        </div>
+        <button onClick={() => { this.onClickHandler() }} >Toggle</button>
+      </div>
+    );
+  }
+
+  onClickHandler() {
+    let newValueField = this.state.valueField === 'value' ? 'size' : 'value';
+
+    this.setState({
+      valueField: newValueField
+    });
+  }
 }; 
